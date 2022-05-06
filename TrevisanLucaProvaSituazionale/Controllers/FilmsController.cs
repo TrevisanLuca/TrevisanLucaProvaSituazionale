@@ -22,17 +22,16 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
+            if (id is null)            
                 return NotFound();
-            }
+            
 
             var film = await _context.Films
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (film == null)
-            {
+
+            if (film is null)            
                 return NotFound();
-            }
+            
 
             return View(film);
         }
@@ -57,16 +56,15 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
+            if (id is null)            
                 return NotFound();
-            }
+            
 
             var film = await _context.Films.FindAsync(id);
-            if (film == null)
-            {
+
+            if (film is null)            
                 return NotFound();
-            }
+            
             return View(film);
         }
 
@@ -74,10 +72,9 @@ namespace TrevisanLucaProvaSituazionale.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,Producer,Genre,Length")] Film film)
         {
-            if (id != film.Id)
-            {
+            if (id != film.Id)            
                 return NotFound();
-            }
+            
 
             if (ModelState.IsValid)
             {
@@ -104,17 +101,14 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id is null)            
+                return NotFound();            
 
             var film = await _context.Films
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (film == null)
-            {
-                return NotFound();
-            }
+
+            if (film is null)            
+                return NotFound();            
 
             return View(film);
         }

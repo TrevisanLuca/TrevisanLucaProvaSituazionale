@@ -29,17 +29,15 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
+            if (id is null)            
                 return NotFound();
-            }
+            
 
             var cinema = await _context.Cinemas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cinema == null)
-            {
-                return NotFound();
-            }
+
+            if (cinema is null)            
+                return NotFound();            
 
             return View(cinema);
         }
@@ -64,16 +62,14 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id is null)            
+                return NotFound();            
 
             var cinema = await _context.Cinemas.FindAsync(id);
-            if (cinema == null)
-            {
+            
+            if (cinema is null)            
                 return NotFound();
-            }
+            
             return View(cinema);
         }
 
@@ -81,10 +77,9 @@ namespace TrevisanLucaProvaSituazionale.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Cinema cinema)
         {
-            if (id != cinema.Id)
-            {
-                return NotFound();
-            }
+            if (id != cinema.Id)            
+               return NotFound();
+            
 
             if (ModelState.IsValid)
             {
@@ -111,17 +106,14 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id is null)            
+               return NotFound();            
 
             var cinema = await _context.Cinemas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cinema == null)
-            {
-                return NotFound();
-            }
+
+            if (cinema is null)            
+                return NotFound();            
 
             return View(cinema);
         }

@@ -22,17 +22,15 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
+            if (id is null)            
                 return NotFound();
-            }
+            
 
             var spectator = await _context.Spectators
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (spectator == null)
-            {
-                return NotFound();
-            }
+
+            if (spectator is null)            
+                return NotFound();            
 
             return View(spectator);
         }
@@ -51,22 +49,20 @@ namespace TrevisanLucaProvaSituazionale.Controllers
                 _context.Add(spectator);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Create","Tickets", new { Id = spectator.Id });
-                //return RedirectToAction(nameof(Index));
             }            
+
             return View(spectator);
         }
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
+            if (id is null)
                 return NotFound();
-            }
 
             var spectator = await _context.Spectators.FindAsync(id);
-            if (spectator == null)
-            {
+
+            if (spectator is null)
                 return NotFound();
-            }
+
             return View(spectator);
         }
 
@@ -74,10 +70,9 @@ namespace TrevisanLucaProvaSituazionale.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,DateOfBirth,TicketId")] Spectator spectator)
         {
-            if (id != spectator.Id)
-            {
+            if (id != spectator.Id)            
                 return NotFound();
-            }
+            
 
             if (ModelState.IsValid)
             {
@@ -104,17 +99,16 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
+            if (id is null)            
                 return NotFound();
-            }
+            
 
             var spectator = await _context.Spectators
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (spectator == null)
-            {
+
+            if (spectator is null)            
                 return NotFound();
-            }
+            
 
             return View(spectator);
         }

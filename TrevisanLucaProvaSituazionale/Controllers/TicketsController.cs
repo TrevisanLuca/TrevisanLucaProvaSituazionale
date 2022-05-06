@@ -46,12 +46,12 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Create(int? Id)
         {
-            if (Id is null)
-            {
+            if (Id is null)            
                 return View("Error");
-            }
+            
 
             var spectaror = await _context.Spectators.FirstOrDefaultAsync(s => s.Id == Id);
+
             if (spectaror is null)
                 return View("Error");
 
@@ -60,6 +60,7 @@ namespace TrevisanLucaProvaSituazionale.Controllers
                                     .Include(ch => ch.Film)
                                     .ToListAsync();
             var ticketViewModel = new TicketViewModel(cinemaHalls, newTicket);
+
             return View(ticketViewModel);
         }
 

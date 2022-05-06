@@ -45,7 +45,6 @@ namespace TrevisanLucaProvaSituazionale.Controllers
             if (id is null)
                 return NotFound();
 
-
             var cinemaHall = await _context.CinemaHalls
                 .Include(ch => ch.Cinema)
                 .Include(ch => ch.Film)
@@ -99,7 +98,6 @@ namespace TrevisanLucaProvaSituazionale.Controllers
         {
             if (id != cinemaHallViewModel.CinemaHall.Id)
                 return NotFound();
-
 
             if (ModelState.IsValid)
             {
@@ -161,7 +159,6 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
         private bool CinemaHallExists(int id) =>
             _context.CinemaHalls.Any(e => e.Id == id);
     }
