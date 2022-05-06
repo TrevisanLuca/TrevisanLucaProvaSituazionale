@@ -22,9 +22,10 @@ namespace TrevisanLucaProvaSituazionale.Controllers
                 var cinemas = await _context.CinemaHalls
                     .Include(ch => ch.Film)
                     .Include(ch => ch.Tickets)
+                    .Include(ch => ch.Spectators)
                     .ToListAsync();
 
-                var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross()));
+                var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross(), c.Spectators.Count()));
                 return View(result);
             }
             else
@@ -32,8 +33,9 @@ namespace TrevisanLucaProvaSituazionale.Controllers
                 var cinemas = await _context.CinemaHalls
                        .Include(ch => ch.Film)
                        .Include(ch => ch.Tickets)
+                       .Include(ch => ch.Spectators)
                        .ToListAsync();
-                var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross()));
+                var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross(), c.Spectators.Count()));
                 return View(result);
             }
         }

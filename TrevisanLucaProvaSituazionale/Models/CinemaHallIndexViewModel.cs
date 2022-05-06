@@ -2,4 +2,4 @@
 
 namespace TrevisanLucaProvaSituazionale.Models;
 
-public record CinemaHallIndexViewModel(CinemaHall CinemaHall, decimal Gross);
+public record CinemaHallIndexViewModel(CinemaHall CinemaHall, decimal Gross, int CurrentSpectators);

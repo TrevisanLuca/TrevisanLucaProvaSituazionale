@@ -19,6 +19,9 @@
                 Max Spectators
             </th>
             <th>
+                Current Spectators
+            </th>
+            <th>
                 Film
             </th>
             <th>
@@ -37,16 +40,19 @@
                 @Html.DisplayFor(modelItem => item.CinemaHall.MaxSpectators)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.CurrentSpectators)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CinemaHall.Film.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gross)
             </td>
             <td>
-                <a asp-action="EmptyHall" asp-route-id="@item.CinemaHall.Id">Empty hall</a> |
-                <a asp-action="Edit" asp-route-id="@item.CinemaHall.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CinemaHall.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CinemaHall.Id">Delete</a>
+                    @Html.ActionLink("Edit","Edit",null, new {Id = item.CinemaHall.Id}, new { @class = "btn btn-sm btn-outline-primary" })
+                    @Html.ActionLink("Details","Details",null, new {Id = item.CinemaHall.Id}, new { @class = "btn btn-sm btn-outline-primary" })
+                    @Html.ActionLink("Empty hall","EmptyHall",null,new {Id = item.CinemaHall.Id}, new { @class = "btn btn-sm btn-danger" })
+                    @Html.ActionLink("Delete","Delete",null, new {Id = item.CinemaHall.Id}, new { @class = "btn btn-sm btn-danger" })
             </td>
         </tr>
 }
