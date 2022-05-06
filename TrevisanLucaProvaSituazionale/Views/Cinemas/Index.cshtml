@@ -22,21 +22,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cinema.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gross)
-            </td>
-            <td>
-                <a asp-action="Index" asp-controller="CinemaHalls" asp-route-id="@item.Cinema.Id">View cinema's halls</a> |
-                <a asp-action="Edit" asp-route-id="@item.Cinema.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Cinema.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Cinema.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cinema.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gross)
+                </td>
+                <td>
+                    @Html.ActionLink("View cinema's halls","Index","CinemaHalls",new {Id = item.Cinema.Id}, new { @class = "btn btn-sm btn-outline-primary" })
+                    @Html.ActionLink("Edit","Edit", new {Id = item.Cinema.Id}, new { @class = "btn btn-sm btn-outline-primary" })
+                    @Html.ActionLink("Details","Details", new {Id = item.Cinema.Id}, new { @class = "btn btn-sm btn-outline-primary" })
+                    @Html.ActionLink("Delete","Delete", new {Id = item.Cinema.Id}, new { @class = "btn btn-sm btn-outline-danger" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
