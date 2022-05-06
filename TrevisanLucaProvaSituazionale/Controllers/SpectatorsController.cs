@@ -1,10 +1,5 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrevisanLucaProvaSituazionale.Data;
 using TrevisanLucaProvaSituazionale.Domain;
@@ -55,9 +50,9 @@ namespace TrevisanLucaProvaSituazionale.Controllers
             {
                 _context.Add(spectator);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            //return RedirectToAction("Ticket/Create", new {Id = spectator.Id});
+                return RedirectToAction("Create","Tickets", new { Id = spectator.Id });
+                //return RedirectToAction(nameof(Index));
+            }            
             return View(spectator);
         }
         public async Task<IActionResult> Edit(int? id)

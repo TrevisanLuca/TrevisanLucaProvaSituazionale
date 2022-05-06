@@ -1,12 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using TrevisanLucaProvaSituazionale.Data;
+using TrevisanLucaProvaSituazionale.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<ProgettoCinemaDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDatabase")));
+
+builder.Services
+    .AddOptions<TicketOptions>()
+    .Bind(builder.Configuration.GetSection("TicketOptions"))
+    .ValidateDataAnnotations();
 
 var app = builder.Build();
 

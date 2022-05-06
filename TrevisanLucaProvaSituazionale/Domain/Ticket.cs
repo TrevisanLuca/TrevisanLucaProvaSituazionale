@@ -7,6 +7,7 @@ public class Ticket
 
     [Required]
     public int CinemaHallId { get; set; }
+    public CinemaHall? CinemaHall { get; set; }
 
     [Required, Range(0, int.MaxValue)]
     public int Position { get; set; }

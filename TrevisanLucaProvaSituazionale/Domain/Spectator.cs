@@ -15,10 +15,16 @@ public class Spectator
     public DateTime DateOfBirth { get; set; }
     public int? TicketId { get; set; }
 
-    public bool IsAdult
+    public bool IsUnderage
     {
-        get { return DateOfBirth.AddYears(18) > DateTime.Now; }
+        get { return DateOfBirth.AddYears(18) > DateTime.Now.Date; }
     }
-    
-    //sconti
+    public bool IsSenior
+    {
+        get { return DateOfBirth.AddYears(70) <= DateTime.Now.Date; }
+    }
+    public bool IsChildren
+    {
+        get { return DateOfBirth.AddYears(5) > DateTime.Now.Date; }
+    }
 }
