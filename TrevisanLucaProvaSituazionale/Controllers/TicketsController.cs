@@ -77,7 +77,7 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
             var cinemaHall = await _context.CinemaHalls
                                            .Include(ch => ch.Film)
-                                           .Include(ch => ch.Spectators)
+                                           //.Include(ch => ch.Spectators)
                                            .FirstOrDefaultAsync(ch => ch.Id == ticketViewModel.Ticket.CinemaHallId);
             if (cinemaHall is null)
                 return NotFound();
@@ -110,80 +110,6 @@ namespace TrevisanLucaProvaSituazionale.Controllers
                 return View("Error");
             }
         }
-
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id is null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var ticket = await _context.Tickets.FindAsync(id);
-        //    if (ticket is null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(ticket);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,CinemaHallId,Position,Price")] Ticket ticket)
-        //{
-        //    if (id != ticket.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(ticket);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!TicketExists(ticket.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(ticket);
-        //}
-
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var ticket = await _context.Tickets
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (ticket == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(ticket);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var ticket = await _context.Tickets.FindAsync(id);
-        //    _context.Tickets.Remove(ticket);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
 
         private bool TicketExists(int id)
         {

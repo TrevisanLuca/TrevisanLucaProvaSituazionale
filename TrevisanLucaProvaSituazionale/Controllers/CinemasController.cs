@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrevisanLucaProvaSituazionale.Data;
 using TrevisanLucaProvaSituazionale.Domain;
+using TrevisanLucaProvaSituazionale.Models;
 
 namespace TrevisanLucaProvaSituazionale.Controllers
 {
@@ -17,7 +18,13 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cinemas.ToListAsync());
+            var cinemas = await _context.Cinemas
+                .Include(c=>c.CinemaHalls)
+                .ThenInclude(ch=>ch.Tickets)
+                .ToListAsync();
+
+            var viewModel = cinemas.Select(c => new CinemaViewModel(c, c.CalculateGross()));
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Details(int? id)

@@ -15,9 +15,26 @@ namespace TrevisanLucaProvaSituazionale.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.CinemaHalls.ToListAsync());
+            if (id is null)
+            {
+                var cinemas = await _context.CinemaHalls
+                    .Include(ch => ch.Film)
+                    .Include(ch => ch.Tickets)
+                    .ToListAsync();
+                var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross()));
+                return View(result);
+            }
+            else
+            {
+                var cinemas = await _context.CinemaHalls
+                       .Include(ch => ch.Film)
+                       .Include(ch => ch.Tickets)
+                       .ToListAsync();
+                var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross()));
+                return View(result);
+            }
         }
 
         public async Task<IActionResult> Details(int? id)

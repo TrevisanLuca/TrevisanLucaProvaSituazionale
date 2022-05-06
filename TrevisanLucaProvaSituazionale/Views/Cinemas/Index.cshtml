@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrevisanLucaProvaSituazionale.Domain.Cinema>
+﻿@model IEnumerable<CinemaViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Cinema.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gross)
             </th>
             <th></th>
         </tr>
@@ -22,12 +25,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Cinema.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Gross)
+            </td>
+            <td>
+                <a asp-action="Index" asp-controller="CinemaHalls" asp-route-id="@item.Cinema.Id">View cinema's halls</a> |
+                <a asp-action="Edit" asp-route-id="@item.Cinema.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Cinema.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Cinema.Id">Delete</a>
             </td>
         </tr>
 }

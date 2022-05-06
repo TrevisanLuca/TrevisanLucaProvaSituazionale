@@ -5,7 +5,7 @@ public class Cinema
     [Required]
     public int Id { get; set; }
     [Required]
-    public string Name { get; set; }    
+    public string Name { get; set; }
     public IEnumerable<CinemaHall>? CinemaHalls { get; set; }
     public Cinema()
     {
@@ -18,5 +18,13 @@ public class Cinema
     }
 
     public decimal CalculateGross()
-    { throw new NotImplementedException(); }
+    {
+        var result = 0m;
+
+        if (CinemaHalls is not null)
+            foreach (var cinemaHall in CinemaHalls)                
+                        result += cinemaHall.CalculateGross();
+
+        return result;
+    }
 }

@@ -14,6 +14,7 @@ public class Spectator
     [Required]
     public DateTime DateOfBirth { get; set; }
     public int? TicketId { get; set; }
+    public Ticket? Ticket { get; set; }
     public Spectator()
     {
 
