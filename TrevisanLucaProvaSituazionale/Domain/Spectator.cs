@@ -14,7 +14,18 @@ public class Spectator
     [Required]
     public DateTime DateOfBirth { get; set; }
     public int? TicketId { get; set; }
+    public Spectator()
+    {
 
+    }
+    public Spectator(int id, string name, string surname, DateTime dateOfBirth, int? ticketId)
+    {
+        Id = id;
+        Name = name;
+        Surname = surname;
+        DateOfBirth = dateOfBirth;
+        TicketId = ticketId;
+    }
     public bool IsUnderage
     {
         get { return DateOfBirth.AddYears(18) > DateTime.Now.Date; }

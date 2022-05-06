@@ -19,4 +19,17 @@ public class Film
 
     [Required, Range(0, int.MaxValue)]
     public int Length { get; set; } //minutes
+    public Film()
+    {
+
+    }
+    public Film(int id, string title, string author, string producer, string genre, int length)
+    {
+        Id = id;
+        Title = title;
+        Author = author;
+        Producer = producer;
+        Genre = genre;
+        Length = length;
+    }
 }

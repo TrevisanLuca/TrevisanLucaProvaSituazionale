@@ -19,6 +19,19 @@ public class CinemaHall
     public IEnumerable<Spectator>? Spectators { get; set; }
     public int? FilmId { get; set; }
     public Film? Film { get; set; }
+    public CinemaHall()
+    {
+
+    }
+    public CinemaHall(int id, string name, int cinemaId, int maxSpectators, int? filmId)
+    {
+        Id = id;
+        Name = name;
+        CinemaId = cinemaId;
+        MaxSpectators = maxSpectators;
+        FilmId = filmId;
+    }
+
     public void EmptyRoom() 
     { throw new NotImplementedException(); }
     public bool AddSpectator(Spectator spectator)

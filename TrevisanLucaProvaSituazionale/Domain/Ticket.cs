@@ -15,5 +15,17 @@ public class Ticket
     [Required, Range(0, int.MaxValue)] //decimal.maxvalue is not an accepted overload
     public decimal Price { get; set; }
     public Spectator? Spectator { get; set; }
-    //todo : riduzioni
+
+    public Ticket()
+    {
+
+    }
+
+    public Ticket(int id, int cinemaHallId, int position, decimal price)
+    {
+        Id = id;
+        CinemaHallId = cinemaHallId;
+        Position = position;
+        Price = price;
+    }
 }

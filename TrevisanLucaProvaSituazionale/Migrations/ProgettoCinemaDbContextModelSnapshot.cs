@@ -37,6 +37,18 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cinemas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Cinema Quattro Stagioni"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Cinema Dante"
+                        });
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.CinemaHall", b =>
@@ -67,6 +79,64 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                     b.HasIndex("FilmId");
 
                     b.ToTable("CinemaHalls");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CinemaId = 1,
+                            FilmId = 1,
+                            MaxSpectators = 50,
+                            Name = "Primavera"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CinemaId = 1,
+                            FilmId = 2,
+                            MaxSpectators = 60,
+                            Name = "Estate"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CinemaId = 1,
+                            FilmId = 1,
+                            MaxSpectators = 20,
+                            Name = "Autunno"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CinemaId = 1,
+                            FilmId = 2,
+                            MaxSpectators = 15,
+                            Name = "Inverno"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CinemaId = 2,
+                            FilmId = 1,
+                            MaxSpectators = 100,
+                            Name = "Inferno"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CinemaId = 2,
+                            FilmId = 2,
+                            MaxSpectators = 150,
+                            Name = "Purgatorio"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CinemaId = 2,
+                            FilmId = 1,
+                            MaxSpectators = 10,
+                            Name = "Paradiso"
+                        });
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Film", b =>
@@ -99,6 +169,26 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Films");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Author = "Peter Jackson",
+                            Genre = "Fantasy",
+                            Length = 180,
+                            Producer = "New Line Cinema",
+                            Title = "Lord of the Rings"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Author = "Gore Verbinski",
+                            Genre = "Horror",
+                            Length = 90,
+                            Producer = "Hiroshi Takahashi",
+                            Title = "The Ring"
+                        });
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Spectator", b =>
@@ -135,6 +225,40 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                         .HasFilter("[TicketId] IS NOT NULL");
 
                     b.ToTable("Spectators");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(1950, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mario",
+                            Surname = "Bianchi",
+                            TicketId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTime(1988, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Giuseppe",
+                            Surname = "Rossi",
+                            TicketId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateOfBirth = new DateTime(1998, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Miriam",
+                            Surname = "Verdi",
+                            TicketId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateOfBirth = new DateTime(2007, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Giovanna",
+                            Surname = "Neri",
+                            TicketId = 4
+                        });
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Ticket", b =>
@@ -157,7 +281,39 @@ namespace TrevisanLucaProvaSituazionale.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CinemaHallId");
+
                     b.ToTable("Tickets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CinemaHallId = 1,
+                            Position = 1,
+                            Price = 10m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CinemaHallId = 1,
+                            Position = 2,
+                            Price = 10m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CinemaHallId = 6,
+                            Position = 1,
+                            Price = 10m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CinemaHallId = 3,
+                            Position = 1,
+                            Price = 10m
+                        });
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.CinemaHall", b =>
@@ -186,6 +342,17 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                     b.HasOne("TrevisanLucaProvaSituazionale.Domain.Ticket", null)
                         .WithOne("Spectator")
                         .HasForeignKey("TrevisanLucaProvaSituazionale.Domain.Spectator", "TicketId");
+                });
+
+            modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Ticket", b =>
+                {
+                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.CinemaHall", "CinemaHall")
+                        .WithMany()
+                        .HasForeignKey("CinemaHallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CinemaHall");
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Cinema", b =>
