@@ -14,7 +14,6 @@ public class Spectator
     [Required]
     public DateTime DateOfBirth { get; set; }
     public int? TicketId { get; set; }
-    public int? CinemaHallId { get; set; }
 
     public bool IsAdult
     {
