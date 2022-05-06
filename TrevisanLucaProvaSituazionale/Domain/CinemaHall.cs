@@ -17,6 +17,7 @@ public class CinemaHall
     [Required, Range(0, int.MaxValue)]
     public int MaxSpectators { get; set; }
     public IEnumerable<Spectator>? Spectators { get; set; }
+    public IEnumerable<Ticket>? Tickets { get; set; }
     public int? FilmId { get; set; }
     public Film? Film { get; set; }
     public CinemaHall()
@@ -46,9 +47,9 @@ public class CinemaHall
     {
         var result = 0m;
 
-        if (Spectators is not null)
-            foreach (var spectator in Spectators)            
-                result += spectator.Ticket.Price;            
+        if (Tickets is not null)
+            foreach (var ticket in Tickets)            
+                result += ticket.Price;            
 
         return result;
     }
