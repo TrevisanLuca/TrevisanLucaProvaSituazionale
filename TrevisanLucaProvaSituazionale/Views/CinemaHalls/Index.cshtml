@@ -43,6 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Gross)
             </td>
             <td>
+                <a asp-action="EmptyHall" asp-route-id="@item.CinemaHall.Id">Empty hall</a> |
                 <a asp-action="Edit" asp-route-id="@item.CinemaHall.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CinemaHall.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CinemaHall.Id">Delete</a>

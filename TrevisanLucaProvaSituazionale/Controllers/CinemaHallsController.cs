@@ -41,18 +41,17 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id is null)            
+            if (id is null)
                 return NotFound();
-            
+
 
             var cinemaHall = await _context.CinemaHalls
                 .Include(ch => ch.Cinema)
-                .Include(ch=> ch.Film)
+                .Include(ch => ch.Film)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (cinemaHall is null)            
+            if (cinemaHall is null)
                 return NotFound();
-            
 
             return View(cinemaHall);
         }
@@ -84,9 +83,9 @@ namespace TrevisanLucaProvaSituazionale.Controllers
                 return NotFound();
 
             var cinemaHall = await _context.CinemaHalls.FindAsync(id);
-            if (cinemaHall is null)            
+            if (cinemaHall is null)
                 return NotFound();
-            
+
             var cinemas = await _context.Cinemas.ToListAsync();
             var movies = await _context.Films.ToListAsync();
             var viewModel = new CinemaHallViewModel(cinemas, cinemaHall, movies);
@@ -97,9 +96,9 @@ namespace TrevisanLucaProvaSituazionale.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CinemaHallViewModel cinemaHallViewModel)
         {
-            if (id != cinemaHallViewModel.CinemaHall.Id)            
+            if (id != cinemaHallViewModel.CinemaHall.Id)
                 return NotFound();
-            
+
 
             if (ModelState.IsValid)
             {
@@ -110,10 +109,10 @@ namespace TrevisanLucaProvaSituazionale.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CinemaHallExists(cinemaHallViewModel.CinemaHall.Id))                    
-                        return NotFound();                    
-                    else                    
-                        throw;                    
+                    if (!CinemaHallExists(cinemaHallViewModel.CinemaHall.Id))
+                        return NotFound();
+                    else
+                        throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -123,13 +122,13 @@ namespace TrevisanLucaProvaSituazionale.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null)
-                return NotFound();            
+                return NotFound();
 
             var cinemaHall = await _context.CinemaHalls
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (cinemaHall is null)            
-                return NotFound();            
+            if (cinemaHall is null)
+                return NotFound();
 
             return View(cinemaHall);
         }
@@ -146,10 +145,17 @@ namespace TrevisanLucaProvaSituazionale.Controllers
 
         public async Task<IActionResult> EmptyHall(int id)
         {
-            var cinemaHall = await _context.CinemaHalls.FindAsync(id);
-            if (cinemaHall  is not null)
-            {
+            var cinemaHall = await _context.CinemaHalls
+                .Include(ch => ch.Spectators)
+                .FirstOrDefaultAsync(ch => ch.Id == id);
 
+            if (cinemaHall is not null)
+            {
+                foreach (var spectator in cinemaHall.Spectators)
+                    spectator.CinemaHallId = null;
+
+                _context.Spectators.UpdateRange(cinemaHall.Spectators);
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));
