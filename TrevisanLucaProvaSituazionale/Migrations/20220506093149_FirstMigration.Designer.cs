@@ -12,7 +12,7 @@ using TrevisanLucaProvaSituazionale.Data;
 namespace TrevisanLucaProvaSituazionale.Migrations
 {
     [DbContext(typeof(ProgettoCinemaDbContext))]
-    [Migration("20220506082533_FirstMigration")]
+    [Migration("20220506093149_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,19 +53,20 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("FilmId")
-                        .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<string>("HallName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MaxSpectators")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CinemaId");
+
+                    b.HasIndex("FilmId");
 
                     b.ToTable("CinemaHalls");
                 });
@@ -163,11 +164,19 @@ namespace TrevisanLucaProvaSituazionale.Migrations
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.CinemaHall", b =>
                 {
-                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.Cinema", null)
+                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.Cinema", "Cinema")
                         .WithMany("CinemaHalls")
                         .HasForeignKey("CinemaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.Film", "Film")
+                        .WithMany()
+                        .HasForeignKey("FilmId");
+
+                    b.Navigation("Cinema");
+
+                    b.Navigation("Film");
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Spectator", b =>

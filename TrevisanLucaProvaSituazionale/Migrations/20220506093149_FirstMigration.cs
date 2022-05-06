@@ -60,10 +60,10 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HallName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CinemaId = table.Column<int>(type: "int", nullable: false),
                     MaxSpectators = table.Column<int>(type: "int", nullable: false),
-                    FilmId = table.Column<int>(type: "int", nullable: false)
+                    FilmId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,6 +74,11 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                         principalTable: "Cinemas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CinemaHalls_Films_FilmId",
+                        column: x => x.FilmId,
+                        principalTable: "Films",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -109,6 +114,11 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                 column: "CinemaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CinemaHalls_FilmId",
+                table: "CinemaHalls",
+                column: "FilmId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Spectators_CinemaHallId",
                 table: "Spectators",
                 column: "CinemaHallId");
@@ -124,9 +134,6 @@ namespace TrevisanLucaProvaSituazionale.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Films");
-
-            migrationBuilder.DropTable(
                 name: "Spectators");
 
             migrationBuilder.DropTable(
@@ -137,6 +144,9 @@ namespace TrevisanLucaProvaSituazionale.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cinemas");
+
+            migrationBuilder.DropTable(
+                name: "Films");
         }
     }
 }
