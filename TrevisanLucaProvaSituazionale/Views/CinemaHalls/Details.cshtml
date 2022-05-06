@@ -1,4 +1,4 @@
-﻿@model TrevisanLucaProvaSituazionale.Domain.CinemaHall
+﻿@model CinemaHall
 
 @{
     ViewData["Title"] = "Details";
@@ -21,6 +21,10 @@
         <dt class = "col-sm-2">Max Spectators</dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MaxSpectators)
+        </dd>
+        <dt class = "col-sm-2">Running movie</dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Film.Title)
         </dd>
     </dl>
 </div>
