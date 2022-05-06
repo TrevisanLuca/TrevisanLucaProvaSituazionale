@@ -16,6 +16,7 @@ public class CinemaHall
     public int MaxSpectators { get; set; }
 
     public IEnumerable<Spectator>? Spectators { get; set; }
+    public int? FilmId { get; set; }
     public Film? Film { get; set; }
     public void EmptyRoom() 
     { throw new NotImplementedException(); }
