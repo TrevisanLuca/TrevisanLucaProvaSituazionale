@@ -20,7 +20,8 @@ namespace TrevisanLucaProvaSituazionale.Controllers
         {
             var cinemas = await _context.Cinemas
                 .Include(c=>c.CinemaHalls)
-                .ThenInclude(ch=>ch.Tickets)
+                .ThenInclude(ch=>ch.Spectators)
+                .ThenInclude(s=>s.Ticket)
                 .ToListAsync();
 
             var viewModel = cinemas.Select(c => new CinemaViewModel(c, c.CalculateGross()));

@@ -21,7 +21,8 @@ namespace TrevisanLucaProvaSituazionale.Controllers
             {
                 var cinemas = await _context.CinemaHalls
                     .Include(ch => ch.Film)
-                    .Include(ch => ch.Tickets)
+                    .Include(ch => ch.Spectators)
+                    .ThenInclude(s => s.Ticket)
                     .ToListAsync();
                 var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross()));
                 return View(result);
@@ -30,7 +31,8 @@ namespace TrevisanLucaProvaSituazionale.Controllers
             {
                 var cinemas = await _context.CinemaHalls
                        .Include(ch => ch.Film)
-                       .Include(ch => ch.Tickets)
+                       .Include(ch => ch.Spectators)
+                       .ThenInclude(s => s.Ticket)
                        .ToListAsync();
                 var result = cinemas.Select(c => new CinemaHallIndexViewModel(c, c.CalculateGross()));
                 return View(result);
@@ -139,6 +141,17 @@ namespace TrevisanLucaProvaSituazionale.Controllers
             var cinemaHall = await _context.CinemaHalls.FindAsync(id);
             _context.CinemaHalls.Remove(cinemaHall);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> EmptyHall(int id)
+        {
+            var cinemaHall = await _context.CinemaHalls.FindAsync(id);
+            if (cinemaHall  is not null)
+            {
+
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

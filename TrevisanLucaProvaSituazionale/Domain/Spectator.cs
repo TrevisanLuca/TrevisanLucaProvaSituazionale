@@ -15,17 +15,20 @@ public class Spectator
     public DateTime DateOfBirth { get; set; }
     public int? TicketId { get; set; }
     public Ticket? Ticket { get; set; }
+    public int? CinemaHallId { get; set; }
+    public CinemaHall? CinemaHall { get; set; }
     public Spectator()
     {
 
     }
-    public Spectator(int id, string name, string surname, DateTime dateOfBirth, int? ticketId)
+    public Spectator(int id, string name, string surname, DateTime dateOfBirth, int? ticketId, int? cinemaHallId)
     {
         Id = id;
         Name = name;
         Surname = surname;
         DateOfBirth = dateOfBirth;
         TicketId = ticketId;
+        CinemaHallId = cinemaHallId;
     }
     public bool IsUnderage
     {

@@ -162,10 +162,10 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                 columns: new[] { "Id", "CinemaHallId", "DateOfBirth", "Name", "Surname", "TicketId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(1950, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mario", "Bianchi", 1 },
-                    { 2, null, new DateTime(1988, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Giuseppe", "Rossi", 2 },
-                    { 3, null, new DateTime(1998, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miriam", "Verdi", 3 },
-                    { 4, null, new DateTime(2007, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Giovanna", "Neri", 4 }
+                    { 1, 1, new DateTime(1950, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mario", "Bianchi", 1 },
+                    { 2, 1, new DateTime(1988, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Giuseppe", "Rossi", 2 },
+                    { 3, 6, new DateTime(1998, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miriam", "Verdi", 3 },
+                    { 4, 3, new DateTime(2007, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Giovanna", "Neri", 4 }
                 });
 
             migrationBuilder.CreateIndex(

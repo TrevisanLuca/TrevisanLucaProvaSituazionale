@@ -230,6 +230,7 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                         new
                         {
                             Id = 1,
+                            CinemaHallId = 1,
                             DateOfBirth = new DateTime(1950, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Mario",
                             Surname = "Bianchi",
@@ -238,6 +239,7 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                         new
                         {
                             Id = 2,
+                            CinemaHallId = 1,
                             DateOfBirth = new DateTime(1988, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Giuseppe",
                             Surname = "Rossi",
@@ -246,6 +248,7 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                         new
                         {
                             Id = 3,
+                            CinemaHallId = 6,
                             DateOfBirth = new DateTime(1998, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Miriam",
                             Surname = "Verdi",
@@ -254,6 +257,7 @@ namespace TrevisanLucaProvaSituazionale.Migrations
                         new
                         {
                             Id = 4,
+                            CinemaHallId = 3,
                             DateOfBirth = new DateTime(2007, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Giovanna",
                             Surname = "Neri",
@@ -335,13 +339,17 @@ namespace TrevisanLucaProvaSituazionale.Migrations
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Spectator", b =>
                 {
-                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.CinemaHall", null)
+                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.CinemaHall", "CinemaHall")
                         .WithMany("Spectators")
                         .HasForeignKey("CinemaHallId");
 
-                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.Ticket", null)
+                    b.HasOne("TrevisanLucaProvaSituazionale.Domain.Ticket", "Ticket")
                         .WithOne("Spectator")
                         .HasForeignKey("TrevisanLucaProvaSituazionale.Domain.Spectator", "TicketId");
+
+                    b.Navigation("CinemaHall");
+
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("TrevisanLucaProvaSituazionale.Domain.Ticket", b =>

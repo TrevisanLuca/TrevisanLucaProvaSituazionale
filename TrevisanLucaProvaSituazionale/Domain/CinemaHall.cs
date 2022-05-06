@@ -16,7 +16,7 @@ public class CinemaHall
 
     [Required, Range(0, int.MaxValue)]
     public int MaxSpectators { get; set; }
-    public IEnumerable<Ticket>? Tickets { get; set; }
+    public IEnumerable<Spectator>? Spectators { get; set; }
     public int? FilmId { get; set; }
     public Film? Film { get; set; }
     public CinemaHall()
@@ -38,7 +38,7 @@ public class CinemaHall
     {
         if (spectator.IsUnderage && Film.Genre == "Horror")
             throw new FilmVietatoException();
-        if (Tickets.Count() == MaxSpectators)
+        if (Spectators.Count() == MaxSpectators)
             throw new SalaAlCompletoException();
         return true;
     }
@@ -46,9 +46,9 @@ public class CinemaHall
     {
         var result = 0m;
 
-        if (Tickets is not null)
-            foreach (var ticket in Tickets)
-                result += ticket.Price;
+        if (Spectators is not null)
+            foreach (var spectator in Spectators)            
+                result += spectator.Ticket.Price;            
 
         return result;
     }

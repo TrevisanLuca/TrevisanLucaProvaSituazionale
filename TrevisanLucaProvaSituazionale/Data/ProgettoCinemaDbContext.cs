@@ -53,10 +53,10 @@ public class ProgettoCinemaDbContext : DbContext
 
         modelBuilder.Entity<Spectator>()
             .HasData(
-            new Spectator(1,"Mario", "Bianchi", DateTime.Parse("1950-03-12"), 1),
-            new Spectator(2,"Giuseppe", "Rossi", DateTime.Parse("1988-10-05"), 2),
-            new Spectator(3,"Miriam", "Verdi", DateTime.Parse("1998-05-06"), 3),
-            new Spectator(4,"Giovanna", "Neri", DateTime.Parse("2007-01-12"), 4)
+            new Spectator(1,"Mario", "Bianchi", DateTime.Parse("1950-03-12"), 1, 1),
+            new Spectator(2,"Giuseppe", "Rossi", DateTime.Parse("1988-10-05"), 2, 1),
+            new Spectator(3,"Miriam", "Verdi", DateTime.Parse("1998-05-06"), 3, 6),
+            new Spectator(4,"Giovanna", "Neri", DateTime.Parse("2007-01-12"), 4, 3)
             );
         #endregion
 
